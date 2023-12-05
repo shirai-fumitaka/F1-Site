@@ -25,7 +25,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 djangoとvueの連携方法
 
-1,まずはCORS（CORSは、バックエンド用）からのリクエストを許可する仕組み）をインストール
+1、まずはCORS（CORSは、バックエンド用）からのリクエストを許可する仕組み）をインストール
 ###
 ```
 pip install django-cors-headers
