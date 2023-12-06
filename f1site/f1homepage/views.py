@@ -9,7 +9,7 @@ def index(request):
 
 def get_data (request):
     qualifying_data= Qualifying.objects.all()
-    data ={'qualifying':[{'rank':q.rank,'driver_name':q.driver_name} for q in qualifying_data]}
+    data ={'qualifying':[{'id':q.id,'venue':q.venue,'rank':q.rank,'driver_name':q.driver_name} for q in qualifying_data]}
     return JsonResponse(data)
 
 # Create your views here.
