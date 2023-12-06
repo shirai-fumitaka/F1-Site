@@ -1,11 +1,16 @@
-<<template>
+<template>
   <div>
-    <p>{{ message }}</p>
-    <ul>
-      <li v-for="item in qualifyingData" :key="item.rank">
-        {{ item.rank }} - {{ item.driver_name }}
-      </li>
-    </ul>
+    <h1>{{ message }}</h1>
+    <v-card>
+      <v-card-text>
+        <p>開催地：{{ qualifyingData.length > 0 ? qualifyingData[0].venue : 'No venue available' }}</p>
+      </v-card-text>
+    </v-card>
+    <v-card v-for="item in qualifyingData" :key="item.id" v-if="item.id >= 1 && item.id <= 20">
+        <v-card-text>
+         <p> {{ item.rank }} {{ item.driver_name }}</p>
+       </v-card-text>
+    </v-card>
   </div>
 </template>
 
@@ -15,7 +20,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      message: 'Hello from Vue.js!',
+      message: '予選結果',
       qualifyingData: []
     };
   },
