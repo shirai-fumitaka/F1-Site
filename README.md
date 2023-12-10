@@ -99,14 +99,16 @@ new Vue({
 });
 ```
 1,Routerの使用
+Routerを使用して複数のページをAPP.vueから表示することができるようになる。
 ###
 ```
 npm install vue-router
 ```
-Routerを使用して複数のページをAPP.vueから表示することができるようになる。
 
-srcディレクトリにrouterディレクトリを作成し、その中にindex.jsファイルを作成します。
+1,srcディレクトリにrouterディレクトリを作成し、その中にindex.jsファイルを作成します。
+2,main.jsでvue-routerをインポートし、Vueインスタンスに適用します。
+3,App.vue内でrouter-viewを使用して現在のルートに対応するコンポーネントを表示します。
 
-main.jsでvue-routerをインポートし、Vueインスタンスに適用します。
+表の表現
+<thead>はHTMLで使用される要素で、HTML表のヘッダーグループを定義します。HTMLの表は通常、ヘッダー行（<thead>）、ボディ行（<tbody>）、およびフッター行（<tfoot>）の3つの部分に分かれます。それぞれの部分は、<th>（表のヘッダーセル）、<td>（表のデータセル）要素で構成されます。
 
-App.vue内でrouter-viewを使用して現在のルートに対応するコンポーネントを表示します。
