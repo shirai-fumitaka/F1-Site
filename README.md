@@ -23,6 +23,17 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+1,vueのインストール
+###
+```
+npm install -g @vue/cli
+```
+この時vueのバージョンは揃える。
+うまくいかない場合はsudoを使う。
+
+
+
+
 djangoとvueの連携方法
 
 1、まずはCORS（CORSは、バックエンド用）からのリクエストを許可する仕組み）をインストール
@@ -87,3 +98,15 @@ new Vue({
     },
 });
 ```
+1,Routerの使用
+###
+```
+npm install vue-router
+```
+Routerを使用して複数のページをAPP.vueから表示することができるようになる。
+
+srcディレクトリにrouterディレクトリを作成し、その中にindex.jsファイルを作成します。
+
+main.jsでvue-routerをインポートし、Vueインスタンスに適用します。
+
+App.vue内でrouter-viewを使用して現在のルートに対応するコンポーネントを表示します。
