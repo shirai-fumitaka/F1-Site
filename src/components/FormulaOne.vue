@@ -20,14 +20,13 @@
             <v-divider></v-divider>
 
             <v-list-item v-for="[icon, text] in links" :key="icon" link style="margin-top: -2px;">
-              <router-link :to="{name: 'Qualifying'}">
+              <router-link :to="{name: 'Qualifying'}"></router-link>
                <v-list-item-icon>
                 <v-icon>{{ icon }}</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>{{ text }}</v-list-item-title>
               </v-list-item-content>
-            </router-link>
             </v-list-item>
           </v-navigation-drawer>
         </v-col>
@@ -58,9 +57,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import axios from 'axios';
-
+import { ref } from 'vue';
 // メッセージデータを保持するリファレンス
 const messages = ref([
   { message: '2023/12/1予選情報を更新しました' },

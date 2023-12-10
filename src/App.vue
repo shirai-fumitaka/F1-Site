@@ -37,26 +37,15 @@
       </v-btn>
     </v-app-bar>
 
+    
     <v-main>
-      <FormulaOne/>
-      <Qualifying/>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import FormulaOne from './components/FormulaOne';
-import Qualifying from './components/Qualifying'
 export default {
   name: 'App',
-
-  components: {
-    FormulaOne,
-    Qualifying
-  },
-
-  data: () => ({
-    //
-  }),
-};
+  };
 </script>
