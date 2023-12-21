@@ -12,6 +12,7 @@
     "core-js": "^3.8.3",
     "vue-native-websocket": "^2.0.15",
     "vue-router": "^3.6.5",
+    "vuejs-paginate": "^2.1.0",
     "vuetify": "^2.6.0",
     "ws": "^8.14.2"
   },
