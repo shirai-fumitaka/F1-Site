@@ -1,8 +1,8 @@
 <template>
     <div>
       <h1>{{ message }}</h1>
-      <div v-for="(qualifyingDataPage, pageIndex) in paginatedData" :key="pageIndex">
-        <h3>{{ qualifyingDataPage[0].gp }}/</h3>
+      <div v-for="(finalDataPage, pageIndex) in paginatedData" :key="pageIndex">
+        <h3>{{ finalDataPage[0].gp }}</h3>
         <table class="title-text">
           <thead>
             <tr>
@@ -11,7 +11,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in qualifyingDataPage" :key="item.id">
+            <tr v-for="item in finalDataPage" :key="item.id">
               <td>{{ item.rank }}</td>
               <td>{{ item.driver.name }}</td>
             </tr>
@@ -19,7 +19,7 @@
         </table>
         <div class="pagination">
           <button v-on:click="prevPage" :disabled="currentPage === 1">前へ</button>
-          <span> {{ qualifyingDataPage[0].gp }} </span>
+          <span> {{ finalDataPage[0].gp }} </span>
           <button v-on:click="nextPage" :disabled="currentPage === pageCount">次へ</button>
         </div>
       </div>
@@ -33,7 +33,7 @@
     data() {
       return {
         message: '決勝結果',
-        qualifyingData: [],
+        finalData: [],
         currentPage: 1,
         itemsPerPage: 20,
       };
@@ -43,11 +43,11 @@
       paginatedData() {
         const startIndex = (this.currentPage - 1) * this.itemsPerPage;
         const endIndex = startIndex + this.itemsPerPage;
-        const slicedData = this.qualifyingData.slice(startIndex, endIndex);
+        const slicedData = this.finalData.slice(startIndex, endIndex);
         return this.groupDataByGP(slicedData);
       },
       pageCount() {
-        return Math.ceil(this.qualifyingData.length / this.itemsPerPage);
+        return Math.ceil(this.finalData.length / this.itemsPerPage);
       },
     },
     mounted() {
@@ -58,7 +58,7 @@
       fetchData() {
         axios.get('http://127.0.0.1:8000/f1homepage/api/data/')
           .then(response => {
-            this.qualifyingData = response.data.qualifying;
+            this.finalData = response.data.final;
           })
           .catch(error => console.error('Error:', error));
       },

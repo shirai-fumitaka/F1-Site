@@ -40,12 +40,71 @@
     
     <v-main>
       <router-view></router-view>
+    
+      <v-navigation-drawer v-model="drawer" class="mt-4" justify="start" app top>
+            <v-sheet color="grey-lighten-4" class="pa-4">
+              <v-avatar class="mb-4" color="grey-darken-1" size="64"> </v-avatar>
+              <div style="margin-top: -100px;">F1サイトメニュー</div>
+            </v-sheet>
+
+            <v-divider></v-divider>
+
+           
+            <v-list-item v-for="[icon, text] in links" :key="icon" link style="margin-top: -2px;">
+              <router-link :to="Link(text)" class="mb-4" color="grey-darken-1" size="64" >
+               <v-list-item-icon>
+                <v-icon>{{ icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>{{ text }}</v-list-item-title>
+              </v-list-item-content>
+             </router-link>
+            </v-list-item>
+          
+    </v-navigation-drawer>    
     </v-main>
   </v-app>
+
 </template>
 
 <script>
+
 export default {
-  name: 'App',
-  };
+ setup(){
+  const drawer = (null);
+
+// ナビゲーションリンクのデータ
+  const links = [
+  ['mdi-home', 'ホーム'],
+  ['mdi-trophy', '予選結果'],
+  ['mdi-trophy-variant', '決勝結果'],
+  ['mdi-crown', 'ポイントランキング'],
+  ['mdi-account', '選手情報'],
+ ];
+
+  const Link=(text) => {
+    
+          if (text === 'ホーム') {
+            return { path: '/', name:' FormulaOne' };
+          } else if (text === '予選結果') {
+            return { path:'/qualifying',name:'FormulaOne_Qualifying' };
+          }
+            else if (text === '決勝結果') {
+            return { path:'/final',name:'FormulaOne_Final' };
+          } 
+            else if (text === 'ポイントランキング') {
+            return { path:'/point',name:'FormulaOne_Point' };
+          }
+            else if (text === '選手情報') {
+            return { path:'/driver',name:'FormulaOne_Driver' };
+          }
+          };
+
+    return {
+      drawer,
+      links,
+      Link,
+    };
+  },
+};
 </script>
