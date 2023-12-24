@@ -1,8 +1,6 @@
 <template>
     <div>
       <h1>{{ message }}</h1>
-      <div v-for="(pointDataPage, pageIndex) in paginatedData" :key="pageIndex">
-        <h3>{{ pointDataPage[0].gp }}</h3>
         <table class="title-text">
           <thead>
             <tr>
@@ -20,12 +18,6 @@
             </tr>
           </tbody>
         </table>
-        <div class="pagination">
-          <button v-on:click="prevPage" :disabled="currentPage === 1">前へ</button>
-          <span> {{ pointDataPage[0].gp }} </span>
-          <button v-on:click="nextPage" :disabled="currentPage === pageCount">次へ</button>
-        </div>
-      </div>
     </div>
   </template>
   
@@ -37,22 +29,9 @@
       return {
         message: 'ポイントランキング',
         pointData: [],
-        currentPage: 1,
-        itemsPerPage: 20,
       };
     },
     
-    computed: {
-      paginatedData() {
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        const endIndex = startIndex + this.itemsPerPage;
-        const slicedData = this.pointData.slice(startIndex, endIndex);
-        return this.groupDataByGP(slicedData);
-      },
-      pageCount() {
-        return Math.ceil(this.pointData.length / this.itemsPerPage);
-      },
-    },
     mounted() {
       // Djangoのビューからデータを取得
       this.fetchData();
@@ -64,28 +43,6 @@
             this.pointData = response.data.point;
           })
           .catch(error => console.error('Error:', error));
-      },
-      groupDataByGP(data) {
-        // GPごとにデータをグループ化する
-        const groupedData = {};
-        data.forEach(item => {
-          const gpName = item.gp;
-          if (!groupedData[gpName]) {
-            groupedData[gpName] = [];
-          }
-          groupedData[gpName].push(item);
-        });
-        return groupedData;
-      },
-      prevPage() {
-        if (this.currentPage > 1) {
-          this.currentPage--;
-        }
-      },
-      nextPage() {
-        if (this.currentPage < this.pageCount) {
-          this.currentPage++;
-        }
       },
     },
   };
