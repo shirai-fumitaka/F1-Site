@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse, JsonResponse
 from .models import Qualifying, Driver, Final, Point
 
@@ -26,14 +27,8 @@ def get_data(request):
             }
             for q in qualifying_data
         ],
-        'drivers': [  # 'driver'ではなく'drivers'に修正
-            {
-                'driver_name': d.driver_name,
-                'age':d.age,
-                'birthplace':d.birthplace,
-                'team':d.team,
-
-            }
+        'drivers': [
+            driver_to_dict(d)
             for d in driver_data
         ],
 
@@ -63,3 +58,12 @@ def get_data(request):
     }
 
     return JsonResponse(data)
+
+def driver_to_dict(driver):
+    return {
+        'driver_name': driver.driver_name,
+        'age': driver.age,
+        'birthplace': driver.birthplace,
+        'team': driver.team,
+        'profile_picture': driver.profile_picture.url if driver.profile_picture else None,
+    }

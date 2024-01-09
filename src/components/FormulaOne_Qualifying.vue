@@ -2,7 +2,7 @@
   <div>
     <h1>{{ message }}</h1>
     <div v-for="(qualifyingDataPage, pageIndex) in paginatedData" :key="pageIndex">
-      <h3>{{ qualifyingDataPage[0].gp }}</h3>
+      <h2>{{ qualifyingDataPage[0].gp }}</h2>
       <table class="title-text">
         <thead>
           <tr>
@@ -18,9 +18,14 @@
         </tbody>
       </table>
       <div class="pagination">
-        <button v-on:click="prevPage" :disabled="currentPage === 1">前へ</button>
-        <span> {{ qualifyingDataPage[0].gp }} </span>
-        <button v-on:click="nextPage" :disabled="currentPage === pageCount">次へ</button>
+      {{ qualifyingDataPage[0].gp }}
+        <ul class="page-numbers">
+          <li v-for="pageNumber in pageCount" :key="pageNumber">
+            <button @click="goToPage(pageNumber)" :class="{ 'active': pageNumber === currentPage }">
+              {{ pageNumber }}
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -77,38 +82,30 @@ export default {
     prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
+        this.scrollToTop();
       }
     },
     nextPage() {
       if (this.currentPage < this.pageCount) {
         this.currentPage++;
+        this.scrollToTop();
       }
+    },
+    goToPage(pageNumber) {
+      if (pageNumber >= 1 && pageNumber <= this.pageCount) {
+        this.currentPage = pageNumber;
+        this.scrollToTop();
+      }
+    },
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     },
   },
 };
 </script>
 
 <style scoped>
-.header-text {
-  letter-spacing: 20px; 
-}
-
-.title-text {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.title-text th,
-.title-text td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 6px;
-}
-
-.title-text th {
-  background-color: rgb(31, 102, 202);
-}
+/* 他のスタイルは省略 */
 
 .pagination {
   margin-top: 10px;
@@ -120,6 +117,49 @@ export default {
 }
 
 .pagination span {
-  margin: 0 10px;
+  margin: 0 5px;
+}
+
+.page-numbers {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.page-numbers li {
+  margin-right: 5px;
+}
+
+.page-numbers button {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.page-numbers button.active {
+  background: linear-gradient(to right, #e079fc 0%, #7c44ff 100%);
+  color: white;
+}
+
+
+.title-text {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.title-text th,
+.title-text td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  background-color:#c01ee0, #4F9DFF;
+}
+
+.title-text th {
+  background: linear-gradient(to right, #e079fc 0%, #7c44ff 100%);
+  color: white;
 }
 </style>

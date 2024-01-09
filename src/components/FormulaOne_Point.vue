@@ -11,7 +11,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in pointDataPage" :key="item.id">
+            <tr v-for="item in pointData" :key="item.id">
               <td>{{ item.rank }}</td>
               <td>{{ item.driver.name }}</td>
               <td>{{ item.point}}</td>
@@ -82,5 +82,18 @@
   .pagination span {
     margin: 0 10px;
   }
+
+  .title-text th,
+.title-text td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.title-text th {
+  background: linear-gradient(to right, #e079fc 0%, #7c44ff 100%);
+  color: white;
+}
+
   </style>
   
